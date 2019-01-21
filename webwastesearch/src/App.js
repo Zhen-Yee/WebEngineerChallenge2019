@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import { Input } from 'semantic-ui-react';
+import TextField from '@material-ui/core/TextField';
 import './App.css';
 
 class App extends Component {
@@ -9,9 +10,13 @@ class App extends Component {
 
     this.state = {
       searchName: "",
-
+      results: [],
+      favorites: [],
     }
 
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleFavorite = this.handleFavorite.bind(this);
   }
 
   handleOnChange() {
@@ -29,7 +34,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>test</h1>
+        <div className="searchBar">
+        <TextField
+          id="outlined-bare"
+          margin="normal"
+          variant="outlined"
+        />
+        </div>
       </div>
     );
   }
