@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Icon, Button } from 'semantic-ui-react';
 import TextField from '@material-ui/core/TextField';
 import './App.css';
+import { Result } from './Result'
 
 class App extends Component {
 
@@ -50,11 +51,24 @@ class App extends Component {
     })
   }
 
-  handleFavorite() {
+  handleFavorite(index) {
    
   }
 
   render() {
+    let results = this.state.results;
+    const listOfResults = results.map((result, index) => {
+      return (
+        <Result key={index} favorite={() => this.handleFavorite(index)} description={result.body} title={result.title}/>
+      )
+    })
+
+    let favorites = this.state.favorites;
+    const listOfFavorites = favorites.map((favorite, index) => {
+      return (
+        <Favorites></Favorites>
+      )
+    })
     return (
       <div className="App">
         <div className="searchBar">
@@ -69,22 +83,10 @@ class App extends Component {
           </Button>
         </div>
         <ul>
-          <li>check</li>
-          <li>check</li>
-          <li>check</li>
-          <li>check</li>
-          <li>cked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot; Name=&quot;Grid Table 6 Colorful&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot; Name=&</li>
+         {listOfResults}
         </ul>
-        {/* <table>
-          <tr>
-            <td>CHECK</td>
-            <td>cked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot; Name=&quot;Grid Table 6 Colorful&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot; Name=&quot;Grid Table 7 Colorful&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;\n   Name=&quot;Grid Table 1 Light Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;\n   Name=&quot;Grid Table 6 Colorful Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;\n   Name=&quot;Grid Table 7 Colorful Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;\n   Name=&quot;Grid Table 1 Light Accent 2&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 2&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 2&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 2&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 2&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;\n   Name=&quot;Grid Table 6 Colorful Accent 2&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;\n   Name=&quot;Grid Table 7 Colorful Accent 2&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;\n   Name=&quot;Grid Table 1 Light Accent 3&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 3&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 3&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 3&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 3&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;\n   Name=&quot;Grid Table 6 Colorful Accent 3&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;\n   Name=&quot;Grid Table 7 Colorful Accent 3&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;\n   Name=&quot;Grid Table 1 Light Accent 4&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 4&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 4&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 4&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 4&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;\n   Name=&quot;Grid Table 6 Colorful Accent 4&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;\n   Name=&quot;Grid Table 7 Colorful Accent 4&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;\n   Name=&quot;Grid Table 1 Light Accent 5&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 5&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 5&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 5&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 5&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;\n   Name=&quot;Grid Table 6 Colorful Accent 5&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;\n   Name=&quot;Grid Table 7 Colorful Accent 5&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;\n   Name=&quot;Grid Table 1 Light Accent 6&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 6&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 6&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 6&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 6&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;\n   Name=&quot;Grid Table 6 Colorful Accent 6&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;\n   Name=&quot;Grid Table 7 Colorful Accent 6&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot; Name=&quot;List Table 1 Light&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot; Name=&quot;List Table 6 Colorful&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot; Name=&quot;List Table 7 Colorful&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;\n   Name=&quot;List Table 1 Light Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2 Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3 Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4 Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark Accent 1&quot;/&gt;\n  &lt;w:LsdException Locked=&quot;false&quot; P</td>
-          </tr>
-          <tr>
-            <td>check</td>
-            <td>check</td>
-          </tr>
-        </table> */}
+
+        {this.state.favorites.length === 0 ? <ul></ul> : <ul>{listOfFavorites}</ul>}
       </div>
     );
   }

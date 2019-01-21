@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-export const Result = props => {
+export const Favorite = props => {
     return (
         <div>
             <Button icon onClick={props.favorite}>
-                <Icon name="star"></Icon>
+                <Icon name="star outlined"></Icon>
             </Button>
             <li>
                 {props.title}<br></br>
