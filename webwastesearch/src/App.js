@@ -24,6 +24,11 @@ class App extends Component {
   }
 
   handleOnChange(e) {
+    if (this.state.searchValue === '') {
+      this.setState({
+        listOfResults: []
+      })
+    }
     this.setState({
       searchValue: e.target.value
     });
@@ -115,10 +120,8 @@ class App extends Component {
             <Icon color="green" name="search" />
           </Button>
         </div>
-        <ul>
-          {this.state.listOfResults}
-        </ul>
-
+        {this.state.searchValue === "" ? <ul></ul> : <ul>{this.state.listOfResults}</ul>}
+      
         {this.state.favorites.length === 0 ? '' : <div id="favorite" style={{ "margin": "auto", "backgroundColor": "#e7ffef", "fontStyle": "volkart" }}>
           <h1 style={{ "color": "green", "fontStyle": "volkart" }}>Favorites</h1>
           <ul>{listOfFavorites}</ul></div>}
