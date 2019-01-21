@@ -9,6 +9,15 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: "volkart";
+}
+
+#banner {
+  height: 200px;
+  width: 100%;
+  background-color: #1fc8db;
+  background-image: linear-gradient(141deg, #1E5A94 0%, #20767B 51%, #22965E 75%);
+  color: white;
+  opacity: 0.95;
+  padding-top: 25px;
 }
