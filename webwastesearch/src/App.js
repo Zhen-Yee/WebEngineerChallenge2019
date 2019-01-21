@@ -38,7 +38,6 @@ class App extends Component {
 
   handleSearch() {
     let valueToSearch = this.state.searchValue;
-    console.log(valueToSearch)
     fetch('https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000')
       .then(res => res.json())
       .then(json => {
@@ -144,9 +143,9 @@ class App extends Component {
           </Button>
         </div>
         {this.state.searchValue === "" ? <ul></ul> : <ul style={{"listStyleType":"none"}}>{this.state.listOfResults}</ul>}
-      
+
         {this.state.favorites.length === 0 ? '' : <div id="favorite" style={{ "margin": "auto", "backgroundColor": "#e7ffef", "fontStyle": "volkart" }}>
-          <h1 style={{ "color": "green", "fontStyle": "volkart" }}>Favorites</h1>
+          <span style={{ "color": "green", "fontStyle": "volkart", "fontWeight" : "bold", "fontSize" : "30px" }}>Favorites</span>
           <ul style={{"listStyleType":"none"}}>{listOfFavorites}</ul></div>}
       </div>
     );

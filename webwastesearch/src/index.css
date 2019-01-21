@@ -21,3 +21,7 @@ code {
   opacity: 0.95;
   padding-top: 25px;
 }
+
+h1 {
+  font-weight: bold;
+}

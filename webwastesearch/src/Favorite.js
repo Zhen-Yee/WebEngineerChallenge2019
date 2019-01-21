@@ -4,7 +4,6 @@ import { Button, Icon } from 'semantic-ui-react';
 export const Favorite = props => {
     let description = escape(props.description);
     let converted_desc = htmlDecode(unescape(description));
-    console.log(converted_desc)
     return (
         <div>
             <Button icon onClick={props.unfavorite}>
