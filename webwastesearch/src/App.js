@@ -15,6 +15,7 @@ class App extends Component {
       listOfResults: [],
       results: [],
       favorites: [],
+      favoritedList: []
     }
 
     this.handleSearch = this.handleSearch.bind(this);
@@ -24,6 +25,7 @@ class App extends Component {
   }
 
   handleOnChange(e) {
+    // Resets search result when search box is empty
     if (this.state.searchValue === '') {
       this.setState({
         listOfResults: []
@@ -40,10 +42,13 @@ class App extends Component {
     fetch('https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000')
       .then(res => res.json())
       .then(json => {
+        // Filter search result by keywords
         let searchResult = json.filter(
           function (json) {
             let result = false;
             let arrWord = json.keywords.split(', ')
+
+            // Loops through array of words and check if they include searched value
             for (let i = 0; i < arrWord.length; i++) {
               if (arrWord[i].toLowerCase().includes(valueToSearch.toLowerCase())) {
                 result = true;
@@ -53,10 +58,25 @@ class App extends Component {
             return result;
           }
         );
+        
+        let favorites = this.state.favorites;
+
+        // Set state for result and create list to display
         let results = searchResult;
         const listOfResults = results.map((result, index) => {
+
+          // Check if it is currently in the favorite list
+          // If so, it will set property 'favorite' to true
+          let favorited = favorites.filter(favorite => {
+            return favorite.title === result.title
+          })
+          if (favorited.length !== 0) {
+            results[index].favorite = true;
+          } else {
+            results[index].favorite = false;
+          }
           return (
-            <Result key={index} favorite={() => this.handleFavorite(index)} description={result.body} title={result.title} />
+            <Result key={index} favorite={() => this.handleFavorite(index)} description={result.body} title={result.title} favorited={result.favorite}/>
           )
         })
         this.setState({
@@ -68,13 +88,16 @@ class App extends Component {
 
   handleFavorite(index) {
     let tempFavorite = this.state.favorites;
+    
+    // Check if there are any favorites
     if (this.state.favorites.length !== 0) {
+
+      // Check if something has already been favorite using title to filter
       let favoriteExist = tempFavorite.filter(favorite => {
-        console.log(favorite.title);
-        console.log(this.state.results[index].title);
         return favorite.title === this.state.results[index].title
       })
-      console.log(favoriteExist)
+
+      // add to favorite it hasn't been favorited before
       if (favoriteExist.length === 0) {
         tempFavorite.push(this.state.results[index]);
         this.setState({
@@ -117,14 +140,14 @@ class App extends Component {
             onChange={this.handleOnChange}
           />
           <Button icon onClick={this.handleSearch}>
-            <Icon color="green" name="search" />
+            <Icon color="green" name="search" size="huge"/>
           </Button>
         </div>
-        {this.state.searchValue === "" ? <ul></ul> : <ul>{this.state.listOfResults}</ul>}
+        {this.state.searchValue === "" ? <ul></ul> : <ul style={{"listStyleType":"none"}}>{this.state.listOfResults}</ul>}
       
         {this.state.favorites.length === 0 ? '' : <div id="favorite" style={{ "margin": "auto", "backgroundColor": "#e7ffef", "fontStyle": "volkart" }}>
           <h1 style={{ "color": "green", "fontStyle": "volkart" }}>Favorites</h1>
-          <ul>{listOfFavorites}</ul></div>}
+          <ul style={{"listStyleType":"none"}}>{listOfFavorites}</ul></div>}
       </div>
     );
   }
