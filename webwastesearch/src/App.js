@@ -3,6 +3,7 @@ import { Icon, Button } from 'semantic-ui-react';
 import TextField from '@material-ui/core/TextField';
 import './App.css';
 import { Result } from './Result'
+import { Favorite } from './Favorite'
 
 class App extends Component {
 
@@ -11,6 +12,7 @@ class App extends Component {
 
     this.state = {
       searchValue: "",
+      listOfResults: [],
       results: [],
       favorites: [],
     }
@@ -45,30 +47,39 @@ class App extends Component {
           return result;
         }
       );
-        this.setState({
-          results: searchResult
-        })
+      let results = searchResult;
+      const listOfResults = results.map((result, index) => {
+      return (
+        <Result key={index} favorite={() => this.handleFavorite(index)} description={result.body} title={result.title}/>
+      )
+      })
+      this.setState({
+        results: searchResult,
+        listOfResults: listOfResults
+      })
     })
   }
 
   handleFavorite(index) {
-   
+    let tempFavorite = this.state.favorites;
+    tempFavorite.push(this.state.results[index]);
+    this.setState({
+      favorite: tempFavorite
+    })
+  }
+
+  handleUnfavorite(index) {
+
   }
 
   render() {
-    let results = this.state.results;
-    const listOfResults = results.map((result, index) => {
-      return (
-        <Result key={index} favorite={() => this.handleFavorite(index)} description={result.body} title={result.title}/>
-      )
-    })
-
     let favorites = this.state.favorites;
     const listOfFavorites = favorites.map((favorite, index) => {
       return (
-        <Favorites></Favorites>
+        <Favorite key={index} unfavorite={() => this.handleUnfavorite(index)} description={favorite.body} title={favorite.title}/>
       )
     })
+
     return (
       <div className="App">
         <div className="searchBar">
@@ -83,10 +94,11 @@ class App extends Component {
           </Button>
         </div>
         <ul>
-         {listOfResults}
+         {this.state.listOfResults}
         </ul>
 
-        {this.state.favorites.length === 0 ? <ul></ul> : <ul>{listOfFavorites}</ul>}
+        {this.state.favorites.length === 0 ? '' : <div id="favorite" style={{"margin":"auto","color":"green","fontStyle":"volkart"}}>
+        <ul>{listOfFavorites}</ul></div>}
       </div>
     );
   }

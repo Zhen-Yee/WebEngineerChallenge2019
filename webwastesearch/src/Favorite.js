@@ -5,7 +5,7 @@ export const Favorite = props => {
     return (
         <div>
             <Button icon onClick={props.favorite}>
-                <Icon name="star outlined"></Icon>
+                <Icon name="star outline"></Icon>
             </Button>
             <li>
                 {props.title}<br></br>
