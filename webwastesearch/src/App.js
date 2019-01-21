@@ -33,41 +33,57 @@ class App extends Component {
     let valueToSearch = this.state.searchValue;
     console.log(valueToSearch)
     fetch('https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000')
-    .then(res => res.json())
-    .then(json => {
+      .then(res => res.json())
+      .then(json => {
         let searchResult = json.filter(
-        function(json) {
-          let result = false;
-          let arrWord = json.keywords.split(', ')
-          for (let i = 0; i < arrWord.length; i++) {
-            if (arrWord[i].toLowerCase().includes(valueToSearch.toLowerCase())) {
-              result = true;
-              break;
-            }
-          };
-          return result;
-        }
-      );
-      let results = searchResult;
-      const listOfResults = results.map((result, index) => {
-      return (
-        <Result key={index} favorite={() => this.handleFavorite(index)} description={result.body} title={result.title}/>
-      )
+          function (json) {
+            let result = false;
+            let arrWord = json.keywords.split(', ')
+            for (let i = 0; i < arrWord.length; i++) {
+              if (arrWord[i].toLowerCase().includes(valueToSearch.toLowerCase())) {
+                result = true;
+                break;
+              }
+            };
+            return result;
+          }
+        );
+        let results = searchResult;
+        const listOfResults = results.map((result, index) => {
+          return (
+            <Result key={index} favorite={() => this.handleFavorite(index)} description={result.body} title={result.title} />
+          )
+        })
+        this.setState({
+          results: searchResult,
+          listOfResults: listOfResults
+        })
       })
-      this.setState({
-        results: searchResult,
-        listOfResults: listOfResults
-      })
-    })
   }
 
   handleFavorite(index) {
     let tempFavorite = this.state.favorites;
-    tempFavorite.push(this.state.results[index]);
-    this.setState({
-      favorites: tempFavorite
-    })
-  }
+    if (this.state.favorites.length !== 0) {
+      let favoriteExist = tempFavorite.filter(favorite => {
+        console.log(favorite.title);
+        console.log(this.state.results[index].title);
+        return favorite.title === this.state.results[index].title
+      })
+      console.log(favoriteExist)
+      if (favoriteExist.length === 0) {
+        tempFavorite.push(this.state.results[index]);
+        this.setState({
+          favorites: tempFavorite
+        })
+      }
+    } else {
+      tempFavorite.push(this.state.results[index]);
+      this.setState({
+        favorites: tempFavorite
+      })
+    }
+    }
+
 
   handleUnfavorite(index) {
     let tempFavorite = this.state.favorites;
@@ -82,7 +98,7 @@ class App extends Component {
     let favorites = this.state.favorites;
     const listOfFavorites = favorites.map((favorite, index) => {
       return (
-        <Favorite key={index} unfavorite={() => this.handleUnfavorite(index)} description={favorite.body} title={favorite.title}/>
+        <Favorite key={index} unfavorite={() => this.handleUnfavorite(index)} description={favorite.body} title={favorite.title} />
       )
     })
 
@@ -94,18 +110,18 @@ class App extends Component {
             margin="normal"
             variant="outlined"
             onChange={this.handleOnChange}
-          /> 
+          />
           <Button icon onClick={this.handleSearch}>
-            <Icon color="green" name="search"/>
+            <Icon color="green" name="search" />
           </Button>
         </div>
         <ul>
-         {this.state.listOfResults}
+          {this.state.listOfResults}
         </ul>
 
-        {this.state.favorites.length === 0 ? '' : <div id="favorite" style={{"margin":"auto","backgroundColor":"#e7ffef","fontStyle":"volkart"}}>
-        <h1 style={{"color":"green","fontStyle":"volkart"}}>Favorites</h1>
-        <ul>{listOfFavorites}</ul></div>}
+        {this.state.favorites.length === 0 ? '' : <div id="favorite" style={{ "margin": "auto", "backgroundColor": "#e7ffef", "fontStyle": "volkart" }}>
+          <h1 style={{ "color": "green", "fontStyle": "volkart" }}>Favorites</h1>
+          <ul>{listOfFavorites}</ul></div>}
       </div>
     );
   }
