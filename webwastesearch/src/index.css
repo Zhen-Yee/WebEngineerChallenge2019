@@ -16,7 +16,7 @@ code {
   height: 200px;
   width: 100%;
   background-color: #1fc8db;
-  background-image: linear-gradient(141deg, #1E5A94 0%, #20767B 51%, #22965E 75%);
+  background-image: linear-gradient(141deg, #1E5A94 0%, #20767B 51%,#22965E 75%);
   color: white;
   opacity: 0.95;
   padding-top: 25px;

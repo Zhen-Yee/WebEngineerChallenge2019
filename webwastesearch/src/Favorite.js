@@ -4,7 +4,7 @@ import { Button, Icon } from 'semantic-ui-react';
 export const Favorite = props => {
     return (
         <div>
-            <Button icon onClick={props.favorite}>
+            <Button icon onClick={props.unfavorite}>
                 <Icon name="star outline"></Icon>
             </Button>
             <li>

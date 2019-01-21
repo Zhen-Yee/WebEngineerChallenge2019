@@ -20,6 +20,7 @@ class App extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFavorite = this.handleFavorite.bind(this);
+    this.handleUnfavorite = this.handleUnfavorite.bind(this);
   }
 
   handleOnChange(e) {
@@ -64,12 +65,17 @@ class App extends Component {
     let tempFavorite = this.state.favorites;
     tempFavorite.push(this.state.results[index]);
     this.setState({
-      favorite: tempFavorite
+      favorites: tempFavorite
     })
   }
 
   handleUnfavorite(index) {
-
+    let tempFavorite = this.state.favorites;
+    let removeFavorite = this.state.favorites[index];
+    tempFavorite = tempFavorite.filter(favorite => favorite !== removeFavorite);
+    this.setState({
+      favorites: tempFavorite
+    })
   }
 
   render() {
@@ -97,7 +103,8 @@ class App extends Component {
          {this.state.listOfResults}
         </ul>
 
-        {this.state.favorites.length === 0 ? '' : <div id="favorite" style={{"margin":"auto","color":"green","fontStyle":"volkart"}}>
+        {this.state.favorites.length === 0 ? '' : <div id="favorite" style={{"margin":"auto","backgroundColor":"#e7ffef","fontStyle":"volkart"}}>
+        <h1 style={{"color":"green","fontStyle":"volkart"}}>Favorites</h1>
         <ul>{listOfFavorites}</ul></div>}
       </div>
     );
